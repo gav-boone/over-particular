@@ -9,12 +9,16 @@ class Particle(object):
         self.acceleration = acceleration
         self.radius = radius
         self.color = color
-        self.dampening_factor = 0.5
+        self.dampening_factor = 1
 
     def update(self, sim: Simulation) -> None:
-        self.velocity += self.acceleration
-        self.location += self.velocity
+        acceleration = 0
+        for particle in sim.particles:
+            #ToDo find out how to push particles away from eachother
+            accerlation = 1 / self.location.distance_to(particle.location)
 
+        self.velocity += acceleration
+        self.location += self.velocity
         self.resolve_collisions(sim)
 
     def is_in_sim(self, sim: Simulation) -> bool:

@@ -9,7 +9,7 @@ def main():
     SCREEN_HEIGHT = 720
     SCREEN_WIDTH = 1280
     FPS = 60
-    PARTICLE_RADIUS = 20
+    PARTICLE_RADIUS = 5
 
     # pygame setup
     pygame.init()
