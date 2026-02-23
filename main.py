@@ -1,6 +1,7 @@
 import pygame
 from particle import Particle
 from simulation import Simulation
+from init_pos import init_pos
 
 
 def main():
@@ -8,6 +9,7 @@ def main():
     SCREEN_HEIGHT = 720
     SCREEN_WIDTH = 1280
     FPS = 60
+    PARTICLE_RADIUS = 20
 
     # pygame setup
     pygame.init()
@@ -16,15 +18,14 @@ def main():
     running = True
     dt = 0
 
-    particle = Particle(
-        location=pygame.Vector2(SCREEN_WIDTH/2, SCREEN_HEIGHT/4),
-        velocity=pygame.Vector2(0, 0),
-        acceleration=pygame.Vector2(0, 1),
-        radius=10,
-        color="blue",
-    )
+    particles = init_pos(PARTICLE_RADIUS, SCREEN_WIDTH, SCREEN_HEIGHT)
 
-    sim = Simulation([particle])
+    sim = Simulation(
+        height=SCREEN_HEIGHT - 2 * PARTICLE_RADIUS,
+        width=SCREEN_WIDTH - 2 * PARTICLE_RADIUS,
+        particles=particles,
+        screen=screen,
+    )
 
     while running:
         # poll for events
